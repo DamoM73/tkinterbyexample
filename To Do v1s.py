@@ -1,16 +1,16 @@
 from tkinter import *
 
 class Todo(Tk):
-    def __init__(self, tasks=None):
+    def __init__(self):
         super().__init__()
 
-        if not tasks:
-            self.tasks = []
+        self.tasks = []
 
         self.title("To-Do App v1")
         self.geometry("300x400")
 
-        todo1 = Label(self, text="--- Add Items Here ---", bg="lightgrey", fg="black", pady=10)
+        todo1 = Label(self, text="--- Add Items Here ---")     
+        todo1.config(bg="lightgrey", fg="black", pady=10)
         self.tasks.append(todo1)
 
         for task in self.tasks:
@@ -23,7 +23,7 @@ class Todo(Tk):
 
         self.bind("<Return>", self.add_task)
 
-        self.colour_schemes = [{"bg":"lightgrey", "fg":"black"}, {"bg":"grey","fg":"white"}]
+        self.colour_schemes = [("lightgrey", "black"), ("grey","white")]
 
     def add_task(self, event=None):
         task_text = self.task_create.get(1.0,END).strip()
@@ -35,8 +35,8 @@ class Todo(Tk):
 
             my_scheme_choice = self.colour_schemes[task_style_choice]
 
-            new_task.config(bg=my_scheme_choice["bg"])
-            new_task.config(fg=my_scheme_choice["fg"])
+            new_task.config(bg=my_scheme_choice[0])
+            new_task.config(fg=my_scheme_choice[1])
 
             new_task.pack(side=TOP, fill=X)
 
