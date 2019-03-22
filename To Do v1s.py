@@ -28,19 +28,19 @@ class Todo(Tk):
     def add_task(self, event=None):
         task_text = self.task_create.get(1.0,END).strip()
 
-        if len(task_text) > 0:
-            new_task = Label(self, text=task_text, pady=10)
+        #if len(task_text) > 0:
+        new_task = Label(self, text=task_text, pady=10)
 
-            task_style_choice = len(self.tasks)%2
+        task_style_choice = len(self.tasks)%2
 
-            my_scheme_choice = self.colour_schemes[task_style_choice]
+        my_scheme_choice = self.colour_schemes[task_style_choice]
 
-            new_task.config(bg=my_scheme_choice[0])
-            new_task.config(fg=my_scheme_choice[1])
+        new_task.config(bg=my_scheme_choice[0])
+        new_task.config(fg=my_scheme_choice[1])
 
-            new_task.pack(side=TOP, fill=X)
+        new_task.pack(side=TOP, fill=X)
 
-            self.tasks.append(new_task)
+        self.tasks.append(new_task)
 
         self.task_create.delete(1.0, END)
 

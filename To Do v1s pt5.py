@@ -1,5 +1,5 @@
 # To Do List v1 simple part 2
-# Make text_box and add task to list
+# Add task to task_list
 
 from tkinter import *
 
@@ -32,15 +32,17 @@ class Window(Tk):
         self.task_create.focus_set()
 
         # Event handler
-        self.bind("<Return>", self.add_task)                        # When return is pressed, add_task() is called                           
+        self.bind("<Return>", self.add_task)                                                   
 
     def add_task(self, event=None):
         # Retrieve task from text box
-        task_text = self.task_create.get(1.0,END)                   # Assigns text in task_create to task text
-        task_text.strip()                                           # Removes spaces at beginning and end of text
+        task_text = self.task_create.get(1.0,END)
+        task_text.strip()
+
+        # add task to task
 
         # clear the text box
-        self.task_create.delete(1.0, END)                           # Clears task_create box
+        self.task_create.delete(1.0, END)
 
 
 # ---- MAIN PROGRAM----
