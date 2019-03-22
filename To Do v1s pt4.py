@@ -1,4 +1,4 @@
-# To Do List v1 simple part 2
+# To Do List v1 simple part 4
 # Make text_box and add task to list
 
 from tkinter import *
@@ -36,8 +36,14 @@ class Window(Tk):
 
     def add_task(self, event=None):
         # Retrieve task from text box
-        task_text = self.task_create.get(1.0,END)                   # Assigns text in task_create to task text
-        task_text.strip()                                           # Removes spaces at beginning and end of text
+        task_text = self.task_create.get(1.0,END).strip()           # Assigns text and removes return at EOL
+        
+        # Create new task and prepare to dsiplay
+        new_task = Label(self, text=task_text, pady=10)             # makes a lable from content of task_text
+        new_task.pack(side=TOP, fill=X)                             # prepares label to be displayed
+        
+        # Add task to tasks list
+        self.tasks.append(new_task)                                 # add label to tasks list
 
         # clear the text box
         self.task_create.delete(1.0, END)                           # Clears task_create box
