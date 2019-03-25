@@ -24,9 +24,45 @@ class Todo(tk.Tk):
 
         self.task_create = tk.Text(self.text_frame, height=3, bg="white", fg="black")
 
-        self.task_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand = 1)
+        self.tasks_canvas.pack(side=tk.TOP, fill=tk.BOTH, expand = 1)
         self.scrollbar.pack(side=tk.RIGHT, fill= tk.Y)
 
         self.canvas_frame = self.tasks_canvas.create_window((0,0), window=self.tasks_frame, anchor="n")
 
+        self.task_create.pack(side=tk.BOTTOM, fill=tk.X)
+        self.text_frame.pack(side=tk.BOTTOM, fill=tk.X)
+        self.task_create.focus_set()
+
+        todo1 = tk.Label(self.tasks_frame, text="--- Add Items Here ---", bg="lightgrey",fg, pady10)
+        todo1.bind("<Button-1>", self.remove_task)
+
+        self.tasks.append(todo1)
+
+        for task in self.tasks:
+            task.pack(side=tk.TOP, fill=tk.X)
+
+        self.bind("<Return>", self.add_task)
+        self.bind("<Configure>", self.on_frame_configure)
+        self.bind_all("<MouseWheel>", self.mouse_scroll)
+        self.bind_all("<Button-4",self.mouse_scroll)
+        self.bind_all("<Button-5>",self.mousescroll)
+        self.tasks_canvas.bind("<Configure>", self.task_width)
+
+        self.colour_schemes = [{"bg": "lightgrey", "fg":"black"},{"bg":"grey", "fg":"white"}]
+
+    def add_task(self, event=None)        
+        task_text = self.task_create.get(1.0, tk.END).strip()
+
+        if len(task_text) > 0:
+            new_task = tk.Label(self.tasks_frame, text=task_text, pady=10)
+            
+            self.set_task_colour(len(self.tasks), new_task)
+
+            new_task.bind("<Button-1>", self.remove_task)
+            new_task.pack(side=tk.Top, fill=tk.X)
+
+            self.tasks.append(new_task)
         
+        self.task_create.delete(1.0, tk.END)
+
+    
